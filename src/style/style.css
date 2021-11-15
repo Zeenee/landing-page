@@ -107,14 +107,14 @@ button {
     display: none;
     width: 32px;
     height: 32px;
-    background: url(/src/img/arrow-left.svg) no-repeat center center/ 32px 32px;
+    background: url(../img/arrow-left.svg) no-repeat center center/ 32px 32px;
 }
 
 .main-header .menu-open-btn {
     display: none;
     width: 32px;
     height: 32px;
-    background: url(/src/img/menu.svg) no-repeat center center/ 32px 32px;
+    background: url(../img/menu.svg) no-repeat center center/ 32px 32px;
 }
 
 /* banner 스타일 */
