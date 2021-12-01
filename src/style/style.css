@@ -1,5 +1,26 @@
 @charset "utf-8";
 
+@keyframes moveCat {
+    0% {
+        transform: rotate(20deg);
+    }
+    20%{
+        transform: rotate(-20deg);
+    }
+    40%{
+        transform: rotate(10deg);
+    }
+    60%{
+        transform: rotate(-10deg);
+    }
+    80%{
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
 :root {
     --main-bg-color: #F2E9D8;
     --main-btn-color: #D97652;
@@ -7,7 +28,7 @@
 }
 
 /* 유틸리티 */
-.sr-only {
+.ir {
     position:absolute;
     left:-10000px;
     top:auto;
@@ -18,6 +39,10 @@
 
 html, body {
     width: 100%;
+}
+
+div, span, article, section, header, main, footer, p, ul, li, label, a, nav, h1, h2, h3 {
+    box-sizing: border-box;
 }
 
 body {
@@ -32,11 +57,13 @@ body.overflow {
 }
 
 a {
+    display: block;
     text-decoration: none;
     color: #000;
 }
 
 button {
+    display: block;
     border: none;
     border-radius: 40px;
     padding: 15px 0;
@@ -49,14 +76,21 @@ button {
     cursor: pointer;
 }
 
+img {
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+}
+
 .br-style {
     display: block;
 }
 
-#top {
+#root {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     min-width: 1280px;
 }
 
@@ -70,39 +104,50 @@ button {
     width: 100%;
 }
 
-.main-header .header-cont {
+.header-cont {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.header-cont.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--main-bg-color);
+    z-index: 999;
+}
+
+.header-cont .wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 102px;
-    width: 1280px;
+    width: 100%;
+    max-width: 1280px;
 }
 
-.main-header .main-title a {
-    display: block;
+.header-cont .main-title img {
     width: 130px;
     height: 40px;
 }
 
-.main-header .main-title img {
-    width: 100%;
-    height: 100%;
-}
-
-.main-header .main-nav {
+.header-cont .main-nav {
     display: flex;
     align-items: center;
 }
 
-.main-header .menu {
+.header-cont .menu {
     display: flex;
 }
 
-.main-header .menu li {
+.header-cont .menu li {
     margin-right: 30px;
 }
 
-.main-header .menu li:last-child {
+.header-cont .menu li:last-child {
     margin-right: 40px;
 }
 
@@ -110,14 +155,14 @@ button {
     width: 140px;
 }
 
-.main-header .menu-close-btn {
+.header-cont .menu-close-btn {
     display: none;
     width: 32px;
     height: 32px;
     background: url(../img/arrow-right.svg) no-repeat center center/ 32px 32px;
 }
 
-.main-header .menu-open-btn {
+.header-cont .menu-open-btn {
     display: none;
     width: 32px;
     height: 32px;
@@ -129,7 +174,8 @@ button {
     display: flex;
     justify-content: space-between;
     height: 798px;
-    width: 1280px;
+    width: 100%;
+    max-width: 1280px;
     background-color: var(--main-bg-color);
     overflow: hidden;
 }
@@ -139,7 +185,6 @@ button {
 }
 
 .banner .banner-tit {
-    width: 737px;
     font-weight: 700;
     font-size: 48px;
     line-height: 60px;
@@ -169,25 +214,27 @@ button {
 /* best picture 스타일 */
 .best-pic {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
 }
 
 .best-pic .img_wrap {
     width: 660px;
     height: 390px;
     border-radius: 30px;
-    margin-right: 110px;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
     overflow: hidden;
 }
 
 .best-pic .img_wrap img {
-    width: 100%;
     margin-top: -88px;
 }
 
 .best-pic-info {
     width: 510px;
-    padding-top: 92px;
+    padding-top: 1px;
 }
 
 .best-pic-info .best-pic-tit {
@@ -203,6 +250,8 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 1280px;
     padding: 120px 0 196px;
 }
 
@@ -244,12 +293,7 @@ button {
 }
 
 .gallery .img-list li:last-child {
-    margin-right: 0;
-}
-
-.gallery .img-list img {
-    width: 100%;
-    height: 100%;
+    margin: 0;
 }
 
 .gallery .learn-more {
@@ -272,7 +316,7 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1164px;
+    width: 1280px;
     background-color: #263140;
     border-radius: 30px;
     padding: 50px 58px;
@@ -327,7 +371,7 @@ button {
     line-height: 20px;
 }
 
-.subscribe .submit-btn {
+.subscribe .subscribe-btn {
     position: absolute;
     top: 50%;
     right: 5px;
@@ -342,13 +386,49 @@ button {
     background: linear-gradient(0deg, rgba(242, 233, 216, 0.6), rgba(242, 233, 216, 0.6)), url(../img/img_5.jpg) no-repeat 0 35% / 100%;
 }
 
+/* scroll top 버튼 스타일 */
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    transition: bottom .3s;
+    display: none;
+}
+
+.scroll-top.btn-active {
+    display: block;
+}
+
+.scroll-top button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #C4C4C4;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.scroll-top .scroll-top-img {
+    width: 40px;
+    height: 40px;
+    fill: #C4C4C4;
+}
+
+.scroll-top:hover .scroll-top-img {
+    fill: #767676;
+}
+
 /* footer */
 .main-footer {
     position: relative;
     display: flex; 
     justify-content: space-between;
     align-items: center;
-    width: 1280px;
+    max-width: 1280px;
+    width: 100%;
     height: 160px;
 }
 
@@ -372,14 +452,9 @@ button {
     margin: 0;
 }
 
-.main-footer .footer-logo {
+.main-footer .footer-logo img {
     width: 226px;
     height: 70px;
-}
-
-.main-footer .footer-logo img {
-    width: 100%;
-    height: 100%;
 }
 
 .main-footer .sns {
@@ -397,7 +472,6 @@ button {
 }
 
 .main-footer .sns a {
-    display: block;
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -419,6 +493,65 @@ button {
     background: var(--color-orange) url(../img/youtube.svg) no-repeat center center/ 24px 24px;
 }
 
+/* 이미지 모달창 스타일 */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.modal.is-active {
+    display: flex;
+}
+
+.img-modal-wrap {
+    width: 500px;
+    height: 500px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 30px rgb(0 0 0 / 25%);
+    overflow: hidden;
+    background-color: #FFF;
+}
+
+.subscribe-modal-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    background: url(../img/modal-bg-img.png) no-repeat 0 0 / 100%;
+    background-color: #F2E9D8;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+}
+
+.subscribe-modal-wrap .subscribe-cat {
+    width: 110px;
+    height: 112px;
+    margin: 60px 0 24px;
+    animation: moveCat 1.5s;
+}
+
+.subscribe-modal strong {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 45px;
+    color: #D97652;
+    margin-bottom: 12px;
+}
+
+.subscribe-modal .subscribe-modal-close {
+    width: 189px;
+    margin-top: 38px;
+}
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
     body {
         font-size: 14px;
@@ -431,25 +564,22 @@ button {
         line-height: 18px;
     }
 
-    #top {
+    #root {
         min-width: 390px;
     }
 
     /* header 스타일 */
-    /* .main-header {
-        min-width: 390px;
-    } */
-    .main-header .header-cont {
+    .header-cont .wrap {
         max-width: 390px;
         height: 76px;
     }
 
-    .main-header .main-title a {
+    .header-cont .main-title img {
         width: 93px;
         height: 28px;
     }
 
-    .main-header .main-nav {
+    .header-cont .main-nav {
         flex-direction: column;
         align-items: flex-start;
         position: absolute;
@@ -464,7 +594,7 @@ button {
         opacity: 0;
     }
 
-    .main-header .main-nav.active {
+    .header-cont .main-nav.active {
         visibility: visible;
         width: 239px;
         height: 100vh;
@@ -472,42 +602,45 @@ button {
         opacity: 1;
     }
 
-    .main-header .main-nav > * {
+    .header-cont .main-nav > * {
         display: none;
     }
 
-    .main-header .main-nav.active .menu {
+    .header-cont .main-nav.active .menu {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin-left: 10px;
     }
 
-    .main-header .menu li {
+    .header-cont .menu li {
         margin: 0 0 30px 0;
     }
 
-    .main-header .menu li:last-child {
+    .header-cont .menu li:last-child {
         margin: 0 0 50px 0;
     }
 
-    .main-header .menu a {
-        color: #FFF;
-    }
-
-    .main-header .main-nav.active .download-btn {
-        display: block;
+    .main-header .download-btn {
         width: 119px;
     }
 
-    .main-header .main-nav.active .menu-close-btn {
+    .header-cont .menu a {
+        color: #FFF;
+    }
+
+    .header-cont .main-nav.active .download-btn {
+        display: block;
+    }
+
+    .header-cont .main-nav.active .menu-close-btn {
         display: block;
         position: absolute;
         top: 22px;
         left: 20px;
     }
 
-    .main-header .menu-open-btn {
+    .header-cont .menu-open-btn {
         display: block;
     }
 
@@ -546,13 +679,14 @@ button {
 
     /* main-contents 스타일 */
     .main-contents {
-        /* min-width: 390px; */
         padding-top: 40px;
     }
 
     /* best picture 스타일 */
     .best-pic {
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
     }
 
     .best-pic .img_wrap {
@@ -582,7 +716,9 @@ button {
     /* gallery 스타일 */
     .gallery {
         position: relative;
-        padding: 60px 0 330px;
+        padding: 60px 32px 330px;
+        width: 100%;
+        max-width: 390px;
     }
 
     .gallery .gallery-tit {
@@ -644,7 +780,7 @@ button {
         bottom: 172px;
         flex-direction: column;
         justify-content: center;
-        width: 262px;
+        width: 326px;
         border-radius: 18px;
         padding: 36px 32px 30px;
     }
@@ -686,7 +822,7 @@ button {
         line-height: 15px;
     }
 
-    .subscribe .submit-btn {
+    .subscribe .subscribe-btn {
         top: 60px;
         right: 0;
         width: 136px;
@@ -700,14 +836,10 @@ button {
     /* footer */
     .main-footer {
         align-items: flex-start;
-        width: 350px;
-        padding: 30px 0 24px;
+        width: 390px;
+        height: 178px;
+        padding: 30px 20px 24px;
     }
-    /* .footer-wrap {
-        align-items: flex-start;
-        width: 350px;
-        padding: 30px 0 24px;
-    } */
 
     .main-footer .footer-logo {
         width: 112px;
@@ -725,7 +857,7 @@ button {
     }
 
     .main-footer .sns {
-        left: 0;
+        left: 20px;
         bottom: 24px;
     }    
 
@@ -737,5 +869,304 @@ button {
         width: 32px;
         height: 32px;
         background-size: 18px 18px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    #root {
+        min-width: 768px;
+    }
+
+    /* header 스타일 */
+    .header-cont .wrap {
+        max-width: 768px;
+    }
+
+    /* banner 스타일 */
+    .banner {
+        justify-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+        max-width: 768px;
+        height: 1024px;
+    }
+
+    .banner .banner-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px 0 0 0;
+    }
+
+    .banner .banner-img {
+        width: 300px;
+        height: 640px;
+    }
+
+    /* main-contents 스타일 */
+    /* best picture 스타일 */
+    .best-pic {
+        flex-direction: column;
+        justify-content: flex-start;
+        max-width: 768px;
+    }
+
+    .best-pic .img_wrap {
+        width: 510px;
+        height: 300px;
+    }
+
+    .best-pic-info {
+        width: 510px;
+        padding-top: 50px;
+    }
+
+    /* gallery 스타일 */
+    .gallery {
+        max-width: 768px;
+        padding: 120px 0 196px;
+    }
+
+    .gallery .gallery-tit {
+        /* width: 510px; */
+    }
+
+    .gallery-txt {
+        /* width: 510px; */
+    }
+
+.gallery-txt strong {
+    font-weight: 700;
+    color: var(--main-btn-color);
+}
+
+.gallery .img-list {
+    display: flex;
+    margin: 88px 0 90px;
+}
+
+.gallery .img-list li {
+    width: 378px;
+    height: 378px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
+    margin-right: 72px;
+    overflow: hidden;
+}
+
+.gallery .img-list li:last-child {
+    margin: 0;
+}
+
+.gallery .img-list li img {
+    height: 100%;
+}
+
+.gallery .learn-more {
+    display: flex;
+    justify-content: center;
+}
+
+.gallery .learn-more .learn-more-txt {
+    margin-right: 52px;
+}
+
+.gallery .learn-more-btn {
+    width: 147px;
+}
+
+/* subscribe 스타일 */
+.subscribe {
+    position: absolute;
+    bottom: 246px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1280px;
+    background-color: #263140;
+    border-radius: 30px;
+    padding: 50px 58px;
+    z-index: 1;
+}
+
+.subscribe-info .subscribe-tit {
+    color: #FFF;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 45px;
+    margin-bottom: 18px;
+}
+
+.subscribe-info .subscribe-txt {
+    width: 491px;
+    color: #F2E9D8;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.subscribe .email-form {
+    position: relative;
+    width: 316px;
+    padding: 20px 146px 20px 68px;
+    background-color: #FFF;
+    border-radius: 60px;
+}
+
+.subscribe .email-form::before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 28px;
+    background: url(../img/mail.svg) center no-repeat;
+    background-size: contain;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+}
+
+.subscribe .email-input {
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.subscribe .email-input::placeholder {
+    color: #767676;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.subscribe .subscribe-btn {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 136px;
+    transform: translateY(-50%);
+}
+
+.main-contents::after {
+    content: "";
+    width: 100%;
+    height: 340px;
+    background: linear-gradient(0deg, rgba(242, 233, 216, 0.6), rgba(242, 233, 216, 0.6)), url(../img/img_5.jpg) no-repeat 0 35% / 100%;
+}
+
+/* scroll top 버튼 스타일 */
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    transition: all .4s;
+    display: none;
+}
+
+.scroll-top.btn-active {
+    display: block;
+}
+
+.scroll-top button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #C4C4C4;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.scroll-top .scroll-top-img {
+    width: 40px;
+    height: 40px;
+    fill: #C4C4C4;
+}
+
+.scroll-top:hover .scroll-top-img {
+    fill: #767676;
+}
+
+    /* footer */
+    .main-footer {
+        max-width: 768px;
+    }
+
+    .main-footer .footer-menu {
+        display: none;
+    }
+
+    .main-footer .footer-menu ul {
+        text-align: end;
+    }
+
+    .main-footer .footer-menu li {
+        margin-bottom: 18px;
+    }
+
+    .main-footer .footer-menu a {
+        color: #767676;
+    }
+
+    .main-footer .footer-menu li:last-child {
+        margin: 0;
+    }
+
+    .main-footer .footer-logo img {
+        width: 226px;
+        height: 70px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+    #root {
+        min-width: 1024px;
+    }
+
+    /* header 스타일 */
+    .main-header .wrap {
+        max-width: 1024px;
+    }
+
+    /* banner 스타일 */
+    .banner {
+        max-width: 1024px;
+    }
+
+    /* main-contents 스타일 */
+    /* best picture 스타일 */
+    .best-pic {
+        max-width: 1024px;
+    }
+    
+    .best-pic .img_wrap {
+        width: 512px;
+        height: 300px;
+    }
+    
+    .best-pic-info {
+        width: 410px;
+        padding: 0;
+    }
+
+    /* gallery 스타일 */
+    .gallery {
+        max-width: 1024px;
+    }
+    
+    .gallery .img-list li {
+        width: 300px;
+        height: 300px;
+        margin-right: 62px;
+    }
+    
+    /* subscribe 스타일 */
+    .subscribe {
+        width: 1024px;
+    }
+
+    /* footer */
+    .main-footer {
+        max-width: 1024px;
     }
 }
