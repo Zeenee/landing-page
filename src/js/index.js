@@ -115,10 +115,6 @@ subscribeModalCloseBtn.addEventListener("click", function() {
 });
 
 window.addEventListener("click", function(e){
-    if(e.target == imgModalSection) {
-        imgModalSection.classList.remove("is-active");
-    }
-
     if(e.target == subscribeModal) {
         if(subscribeModal.classList.contains("is-active")){
             subscribeModal.classList.remove("is-active");
