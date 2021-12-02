@@ -41,7 +41,7 @@ html, body {
     width: 100%;
 }
 
-div, span, article, section, header, main, footer, p, ul, li, label, a, nav, h1, h2, h3 {
+div, span, article, section, header, main, footer, p, ul, li, label, a, nav, h1, h2, h3, form, input {
     box-sizing: border-box;
 }
 
@@ -281,6 +281,7 @@ img {
 .gallery .img-list {
     display: flex;
     margin: 88px 0 90px;
+    gap: 72px;
 }
 
 .gallery .img-list li {
@@ -288,17 +289,13 @@ img {
     height: 378px;
     border-radius: 30px;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
-    margin-right: 72px;
     overflow: hidden;
-}
-
-.gallery .img-list li:last-child {
-    margin: 0;
 }
 
 .gallery .learn-more {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .gallery .learn-more .learn-more-txt {
@@ -340,7 +337,7 @@ img {
 
 .subscribe .email-form {
     position: relative;
-    width: 316px;
+    width: 530px;
     padding: 20px 146px 20px 68px;
     background-color: #FFF;
     border-radius: 60px;
@@ -494,7 +491,7 @@ img {
 }
 
 /* 이미지 모달창 스타일 */
-.modal {
+.subscribe-modal {
     position: fixed;
     top: 0;
     right: 0;
@@ -507,20 +504,11 @@ img {
     z-index: 999;
 }
 
-.modal.is-active {
+.subscribe-modal.is-active {
     display: flex;
 }
 
-.img-modal-wrap {
-    width: 500px;
-    height: 500px;
-    border-radius: 30px;
-    box-shadow: 10px 10px 30px rgb(0 0 0 / 25%);
-    overflow: hidden;
-    background-color: #FFF;
-}
-
-.subscribe-modal-wrap {
+.subscribe-modal .subscribe-modal-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -532,7 +520,7 @@ img {
     border-radius: 30px;
 }
 
-.subscribe-modal-wrap .subscribe-cat {
+.subscribe-modal .subscribe-cat {
     width: 110px;
     height: 112px;
     margin: 60px 0 24px;
@@ -545,6 +533,14 @@ img {
     line-height: 45px;
     color: #D97652;
     margin-bottom: 12px;
+}
+
+.subscribe-modal p {
+    text-align: center;
+}
+
+.subscribe-modal p .br-style {
+    display: inline;
 }
 
 .subscribe-modal .subscribe-modal-close {
@@ -738,7 +734,7 @@ img {
         display: block;
     }
 
-    .img-list-wrap {
+    .gallery .img-list-wrap {
         position: relative;
         width: 100vw;
         height: 360px;
@@ -749,6 +745,7 @@ img {
         position: absolute;
         margin: 0;
         padding: 40px 32px 60px 32px;
+        gap: 20px;
     }
 
     .gallery .img-list li {
@@ -756,7 +753,6 @@ img {
         height: 260px;
         border-radius: 18px;
         box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
-        margin-right: 20px;
     }
 
     .gallery .learn-more {
@@ -801,7 +797,7 @@ img {
     }
 
     .subscribe .email-form {
-        width: 189px;
+        width: 100%;
         padding: 12px 16px 12px 48px;
         margin-bottom: 60px;
     }
@@ -870,6 +866,34 @@ img {
         height: 32px;
         background-size: 18px 18px;
     }
+
+
+    /* 이미지 모달창 스타일 */
+    .subscribe-modal .subscribe-modal-wrap {
+        width: 300px;
+        height: 300px;
+    }
+
+    .subscribe-modal .subscribe-cat {
+        width: 60px;
+        height: 62px;
+        margin: 40px 0 24px;
+    }
+
+    .subscribe-modal strong {
+        font-size: 24px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    }
+
+    .subscribe-modal p .br-style {
+        display: block;
+    }
+
+    .subscribe-modal .subscribe-modal-close {
+        width: 163px;
+        margin-top: 38px;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -924,168 +948,59 @@ img {
     /* gallery 스타일 */
     .gallery {
         max-width: 768px;
-        padding: 120px 0 196px;
+        padding: 120px 0 330px;
     }
 
-    .gallery .gallery-tit {
-        /* width: 510px; */
+    .gallery .img-list {
+        gap: 20px;
     }
 
-    .gallery-txt {
-        /* width: 510px; */
+    .gallery .img-list li {
+        width: 240px;
+        height: 240px;
+        border-radius: 18px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
     }
 
-.gallery-txt strong {
-    font-weight: 700;
-    color: var(--main-btn-color);
-}
+    /* subscribe 스타일 */
+    .subscribe {
+        bottom: 172px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 768px;
+    }
 
-.gallery .img-list {
-    display: flex;
-    margin: 88px 0 90px;
-}
+    .subscribe-info .subscribe-tit {
+        margin-bottom: 20px;
+    }
 
-.gallery .img-list li {
-    width: 378px;
-    height: 378px;
-    border-radius: 30px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.25);
-    margin-right: 72px;
-    overflow: hidden;
-}
+    .subscribe-info .subscribe-txt {
+        margin-bottom: 24px;
+    }
 
-.gallery .img-list li:last-child {
-    margin: 0;
-}
+    .subscribe .email-form {
+        width: 100%;
+        padding: 12px 16px 12px 48px;
+        margin-bottom: 65px;
+    }
 
-.gallery .img-list li img {
-    height: 100%;
-}
+    .subscribe .email-form::before {
+        left: 16px;
+        width: 18px;
+        height: 18px;
+    }
 
-.gallery .learn-more {
-    display: flex;
-    justify-content: center;
-}
+    .subscribe .subscribe-btn {
+        top: 60px;
+        right: 0;
+        width: 136px;
+        transform: none;
+    }
 
-.gallery .learn-more .learn-more-txt {
-    margin-right: 52px;
-}
-
-.gallery .learn-more-btn {
-    width: 147px;
-}
-
-/* subscribe 스타일 */
-.subscribe {
-    position: absolute;
-    bottom: 246px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1280px;
-    background-color: #263140;
-    border-radius: 30px;
-    padding: 50px 58px;
-    z-index: 1;
-}
-
-.subscribe-info .subscribe-tit {
-    color: #FFF;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 45px;
-    margin-bottom: 18px;
-}
-
-.subscribe-info .subscribe-txt {
-    width: 491px;
-    color: #F2E9D8;
-    font-size: 14px;
-    line-height: 18px;
-}
-
-.subscribe .email-form {
-    position: relative;
-    width: 316px;
-    padding: 20px 146px 20px 68px;
-    background-color: #FFF;
-    border-radius: 60px;
-}
-
-.subscribe .email-form::before {
-    position: absolute;
-    content: "";
-    top: 50%;
-    left: 28px;
-    background: url(../img/mail.svg) center no-repeat;
-    background-size: contain;
-    width: 24px;
-    height: 24px;
-    transform: translateY(-50%);
-}
-
-.subscribe .email-input {
-    border: none;
-    width: 100%;
-    font-size: 16px;
-    line-height: 20px;
-}
-
-.subscribe .email-input::placeholder {
-    color: #767676;
-    font-size: 16px;
-    line-height: 20px;
-}
-
-.subscribe .subscribe-btn {
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    width: 136px;
-    transform: translateY(-50%);
-}
-
-.main-contents::after {
-    content: "";
-    width: 100%;
-    height: 340px;
-    background: linear-gradient(0deg, rgba(242, 233, 216, 0.6), rgba(242, 233, 216, 0.6)), url(../img/img_5.jpg) no-repeat 0 35% / 100%;
-}
-
-/* scroll top 버튼 스타일 */
-.scroll-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 999;
-    transition: all .4s;
-    display: none;
-}
-
-.scroll-top.btn-active {
-    display: block;
-}
-
-.scroll-top button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border: 1px solid #C4C4C4;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.scroll-top .scroll-top-img {
-    width: 40px;
-    height: 40px;
-    fill: #C4C4C4;
-}
-
-.scroll-top:hover .scroll-top-img {
-    fill: #767676;
-}
+    .main-contents::after {
+        height: 240px;
+    }
 
     /* footer */
     .main-footer {
@@ -1153,11 +1068,14 @@ img {
     .gallery {
         max-width: 1024px;
     }
+
+    .gallery .img-list {
+        gap: 62px;
+    }
     
     .gallery .img-list li {
         width: 300px;
         height: 300px;
-        margin-right: 62px;
     }
     
     /* subscribe 스타일 */

@@ -27,12 +27,12 @@ function activeScrollTopBtn(htmlScrollTop) {
     }
 }
 
-// 3. 스크롤이 맨 하단으로 이동되었을 경우에는 footer 위로 이동
+// 3. 스크롤이 footer를 만난 경우에는 footer 위로 이동
 function moveScrollTopBtn(htmlScrollTop){
     let htmlScrollHeight = document.querySelector("html").scrollHeight;
     let footerHeight = footerSection.offsetHeight;
 
-    if(htmlScrollTop + window.innerHeight == htmlScrollHeight){
+    if(htmlScrollHeight - (htmlScrollTop + window.innerHeight) <= footerHeight){
         scrollTopBtn.style.bottom = `${footerHeight+24}px`;
     } else {
         scrollTopBtn.style.bottom = `24px`;
@@ -47,9 +47,21 @@ window.addEventListener("scroll", function() {
     moveScrollTopBtn(htmlScrollTop);
 });
 
+window.addEventListener("resize", function() {
+    let htmlScrollTop = document.querySelector("html").scrollTop;
+
+    moveScrollTopBtn(htmlScrollTop);
+});
+
+window.addEventListener("load", function() {
+    let htmlScrollTop = document.querySelector("html").scrollTop;
+
+    moveScrollTopBtn(htmlScrollTop);
+});
+
 // scrollTop 버튼 이벤트
 // scrollTop 버튼을 클릭하면 스크롤이 천천히(smooth) 최상단으로 이동합니다.
-scrollTopBtn.addEventListener("click", () => {
+scrollTopBtn.addEventListener("click", function() {
     window.scrollTo({
         top: 0,
         left: 0,
@@ -73,26 +85,6 @@ menuCloseBtn.addEventListener("click", function(){
     body.classList.remove("overflow");
 });
 
-// 이미지 모달창
-const imgModalSection = document.querySelector(".img-modal");
-const imgModalWrap = document.querySelector(".img-modal-wrap");
-const imgList = document.querySelectorAll(".img-list li");
-
-function activeModal(imgItem) {
-    let imgSrc = imgItem.src;
-    let imgAltText = imgItem.alt;
-    imgModalSection.classList.add("is-active");
-
-    imgModalWrap.innerHTML = `<img src="${imgSrc}" alt="${imgAltText}" />`;
-}
-
-imgList.forEach((e) => {
-    e.addEventListener("click", () => {
-        let imgElement = e.querySelector("img");
-        activeModal(imgElement);
-    });
-});
-
 // subscribe(구독) 감사 모달창
 const emailForm = document.querySelector(".email-form");
 const emailInput = document.querySelector(".email-input");
@@ -114,15 +106,15 @@ function emailValidate(email) {
     }
 }
 
-subscribeBtn.addEventListener("click", (e) => {
+subscribeBtn.addEventListener("click", function() {
     emailValidate(emailInput);
 });
 
-subscribeModalCloseBtn.addEventListener("click", () => {
+subscribeModalCloseBtn.addEventListener("click", function() {
     emailForm.submit();
 });
 
-window.onclick = function(e){
+window.addEventListener("click", function(e){
     if(e.target == imgModalSection) {
         imgModalSection.classList.remove("is-active");
     }
@@ -132,4 +124,4 @@ window.onclick = function(e){
             subscribeModal.classList.remove("is-active");
         }
     }
-}
+});
